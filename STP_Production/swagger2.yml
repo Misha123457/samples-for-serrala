@@ -1,0 +1,146 @@
+swagger: "2.0"
+info:
+  description: SAP-MongoDB 
+  version: "1.0.0"
+  title: rest end-points
+consumes:
+  - application/json
+produces:
+  - application/json
+basePath: "/api"
+# Paths supported by the server application
+paths:
+  /results_receive:
+    get:
+      operationId: table.result
+      tags:
+        - Results receive
+      summary: Read results
+      description: Read  results
+      responses:
+        200:
+          description: Successfully read people list operation       
+        
+  /table_transfer:
+    post:
+      operationId: table.transfer
+      tags:
+        - Tables with data transfer
+      summary: Transfer content to table
+      description: Transfer content to table
+      parameters:
+        - name: table
+          in: body
+          description: Content to transfer
+          required: True
+          schema:
+            type: object
+            properties:
+              TABLE:
+                type: string
+                description: First name of person to create
+              CONTENT:
+                type: array
+                items: 
+                    type: object
+                    description: Transfer content to table
+                    properties: 
+                     MANDT: 
+                        type: string
+                        description: csde
+                        example: "020"
+                     BUKRS: 
+                        type: string
+                        description: company code
+                        example: YS90
+                     HBKID: 
+                        type: string
+                        example: FI-RE
+                     HKTID: 
+                        type: string
+                        example: FI-RE
+                     KTDLFDNR: 
+                        type: string
+                        example: "00000002"
+                     VERSDATUM: 
+                        type: string
+                        format: date
+                        example: 2019-04-08
+                     VERSZEIT: 
+                        type: string
+                        example: "14:08:20"
+                     VALUTA: 
+                        type: string
+                        format: date
+                        example: 2017-02-17
+                     KTDBTR: 
+                        type: number
+                        example: 7000
+                     ABSTNR: 
+                        type: string
+                        example: "00000000"
+                     INSDATE: 
+                        type: string
+                        format: date
+                        example: 2017-02-17
+                     INSTIME: 
+                        type: string
+                        example: 09:17:31
+                     KTDVALUTA: 
+                        type: string
+                        format: date
+                        example: 2017-02-17
+                     GRPNR: 
+                        type: number
+                        example: -1
+      responses:
+        201:
+          description: Successfully transfered table   
+  /start_analytics:
+    post:
+      operationId: table.analytics
+      tags:
+        - Receiving parameters for STP analytics
+      summary: Transfer content to table
+      description: Transfer content to table
+      parameters:
+        - name: table
+          in: body
+          description: Content to transfer
+          required: True
+          schema:
+            type: object
+            properties:
+              PLANNING_GROUPS:
+                type: array
+                items: 
+                    type: integer 
+                    example: 69
+              ACCOUNTS:
+                type: array
+                items: 
+                    type: object
+                    description: Transfer analytics params
+                    properties: 
+                     BUKRS: 
+                        type: string
+                        example: HOAG
+                     HBKID: 
+                        type: string
+                        example: COM01
+                     HKTID: 
+                        type: string
+                        example: COEU1
+              INTERVAL:               
+                    description: Transfer analytics interval
+                    properties: 
+                     START: 
+                        type: string
+                        example: "20190101"
+                     END: 
+                        type: string
+                        example: "20190930"
+                            
+      responses:
+        201:
+          description: Successfully transfered table   
